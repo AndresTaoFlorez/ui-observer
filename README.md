@@ -56,6 +56,8 @@ make test                                 # unit + integration tests
 
 ## Documentation
 
+- **[docs-vault/](docs-vault/Index.md)** — full user guide as an Obsidian-ready vault
+  (36 interlinked notes; open the `docs-vault` folder as a vault to browse the graph)
 - [Architecture](docs/architecture.md) — shared-browser design, processes, ports
 - [Missions](docs/missions.md) — declarative YAML mission format
 - [Agent integration](docs/agent-integration.md) — CDP, MCP, HTTP API, CLI
