@@ -56,14 +56,16 @@ make test                                 # unit + integration tests
 
 ## Documentation
 
-- **[docs-vault/](docs-vault/Index.md)** — full user guide as an Obsidian-ready vault
-  (36 interlinked notes; open the `docs-vault` folder as a vault to browse the graph)
-- [Architecture](docs/architecture.md) — shared-browser design, processes, ports
-- [Missions](docs/missions.md) — declarative YAML mission format
-- [Agent integration](docs/agent-integration.md) — CDP, MCP, HTTP API, CLI
-- [Security](docs/security.md) — loopback binding, URL policy, redaction
-- [Fedora notes](docs/fedora.md) — SELinux labels, host-gateway, firewall
-- [Troubleshooting](docs/troubleshooting.md)
+**[docs-vault/](docs-vault/Index.md)** is the single source of truth — a full user guide as an
+Obsidian-ready vault (39 interlinked notes; open the `docs-vault` folder as a vault to browse
+the graph). Key entry points:
+
+- [Quick Start](docs-vault/05-Operations/Quick%20Start.md) · [Observing Your Own App](docs-vault/05-Operations/Observing%20Your%20Own%20App.md)
+- [Architecture Overview](docs-vault/02-Architecture/Architecture%20Overview.md) · [Mission Format](docs-vault/03-Missions/Mission%20Format.md)
+- [Agent Integration](docs-vault/04-Agents/Agent%20Integration.md) — and **[AGENTS.md](AGENTS.md)** for the agents themselves
+- [Security Model](docs-vault/06-Security/Security%20Model.md) · [Fedora Notes](docs-vault/05-Operations/Fedora%20Notes.md) · [Troubleshooting](docs-vault/05-Operations/Troubleshooting.md)
+
+The legacy `docs/*.md` files are pointer stubs kept for link stability.
 
 ## Repository layout
 
