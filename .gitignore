@@ -14,6 +14,13 @@ artifacts/*.png
 # Browser profile data must never enter Git
 browser-profile/
 
+# Build artifacts
+artifacts/dashboard-dev/
+
+# Python cache
+__pycache__/
+*.pyc
+
 # Editor/OS noise
 docs-vault/.obsidian/
 .DS_Store
