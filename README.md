@@ -370,6 +370,92 @@ docker compose exec raveneye supervisorctl -c /etc/raveneye/supervisord.conf res
 
 ---
 
+## Releasing a new version
+
+Every release is a git tag push. CI handles the rest.
+
+**Step 1 — bump the package version**
+
+```bash
+# from repo root, on main
+npm version patch --workspace=apps/mcp-server   # 0.1.0 → 0.1.1
+# (use `minor` or `major` as needed)
+```
+
+This writes the new version into `apps/mcp-server/package.json` and creates a
+local git commit automatically.
+
+**Step 2 — tag and push**
+
+```bash
+git tag v0.1.1          # must match the package.json version exactly
+git push origin main --tags
+```
+
+GitHub Actions (`.github/workflows/publish.yml`) picks up the `v*` tag and:
+- Builds and pushes `andrestao577/raveneye:<version>` + `:latest` to Docker Hub
+- Publishes `raveneye-mcp@<version>` to npm
+
+**Updating as an end-user**
+
+```bash
+# pull the latest Docker image and restart
+docker pull andrestao577/raveneye:latest
+docker compose -f ~/.raveneye/compose.yaml --project-directory ~/.raveneye up -d
+
+# update the MCP CLI
+npm update -g raveneye-mcp
+```
+
+Windows:
+```powershell
+docker pull andrestao577/raveneye:latest
+docker compose -f "$HOME\.raveneye\compose.yaml" --project-directory "$HOME\.raveneye" up -d
+npm update -g raveneye-mcp
+```
+
+---
+
+## If credentials are leaked
+
+Act immediately — within minutes, not hours.
+
+### npm token (`NPM_TOKEN`)
+
+1. Go to **npmjs.com → Account → Access Tokens**, revoke the token that leaked.
+2. Generate a new **Granular Access Token** with `read and write` on `raveneye-mcp` only.
+3. Copy the new token.
+4. In GitHub → Settings → Secrets → Actions, update `NPM_TOKEN` with the new value.
+
+### Docker Hub token (`DOCKERHUB_TOKEN`)
+
+1. Go to **hub.docker.com → Account Settings → Security**, revoke the compromised token.
+2. Create a new Access Token with `Read & Write` scope.
+3. In GitHub → Settings → Secrets → Actions, update `DOCKERHUB_TOKEN` with the new value.
+
+### After rotating either token
+
+Run a test release (bump patch + tag) to verify CI still publishes successfully:
+
+```bash
+npm version patch --workspace=apps/mcp-server
+git tag v<new-version>
+git push origin main --tags
+```
+
+Watch the Actions tab — both jobs (`docker` and `npm`) must show green.
+
+### If the leaked token was used to publish a bad version
+
+```bash
+# Deprecate the compromised version so users won't install it
+npm deprecate raveneye-mcp@<version> "security: revoked — upgrade to latest"
+```
+
+Docker Hub: delete the specific tag from hub.docker.com → Repository → Tags.
+
+---
+
 ## Documentation
 
 **[docs-vault/](docs-vault/Index.md)** is the single source of truth — a full user guide as an
