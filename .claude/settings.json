@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "raveneye": {
+      "command": "npx",
+      "args": ["--yes", "raveneye-mcp-server"]
+    }
+  }
+}
