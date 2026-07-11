@@ -30,19 +30,19 @@ Windows (PowerShell):
 irm https://raw.githubusercontent.com/AndresTaoFlorez/raveneye/main/install.ps1 | iex
 ```
 
-El script descarga `compose.hub.yaml`, hace `docker pull andrestao577/raveneye:latest`, instala `raveneye-mcp` globalmente desde npm y lo registra en Claude Code. No clona el repositorio — el repo puede ser privado. Al terminar, abre una nueva conversación en Claude Code y escribe `/mcp` — verás `raveneye` con 11 tools.
+El script descarga `compose.hub.yaml`, hace `docker pull andrestao577/raveneye:latest`, instala `raveneye-mcp-server` globalmente desde npm y lo registra en Claude Code. No clona el repositorio — el repo puede ser privado. Al terminar, abre una nueva conversación en Claude Code y escribe `/mcp` — verás `raveneye` con 11 tools.
 
 ### Instalar solo el MCP server (si ya tienes Docker corriendo)
 
 **Global** — disponible en cualquier proyecto:
 ```bash
-npm install -g raveneye-mcp
-claude mcp add raveneye -- raveneye-mcp
+npm install -g raveneye-mcp-server
+claude mcp add raveneye -- raveneye-mcp-server
 ```
 
 **Dev dependency** — solo en tu proyecto actual:
 ```bash
-npm install -D raveneye-mcp
+npm install -D raveneye-mcp-server
 ```
 
 Luego agrega en tu `.claude/settings.json` o `codex.json`:
@@ -51,13 +51,13 @@ Luego agrega en tu `.claude/settings.json` o `codex.json`:
   "mcpServers": {
     "raveneye": {
       "command": "npx",
-      "args": ["--yes", "raveneye-mcp"]
+      "args": ["--yes", "raveneye-mcp-server"]
     }
   }
 }
 ```
 
-> `npx --yes raveneye-mcp` funciona tanto si está instalado como `devDependency` en el proyecto como si no está instalado en absoluto (lo descarga automáticamente).
+> `npx --yes raveneye-mcp-server` funciona tanto si está instalado como `devDependency` en el proyecto como si no está instalado en absoluto (lo descarga automáticamente).
 
 ### Desinstalar completamente
 
@@ -392,7 +392,7 @@ git tag v0.1.1          # must match the package.json version exactly
 git push origin main --tags
 ```
 
-GitHub Actions (`.github/workflows/publish.yml`) picks up the `v*` tag and publishes `raveneye-mcp@<version>` to npm.
+GitHub Actions (`.github/workflows/publish.yml`) picks up the `v*` tag and publishes `raveneye-mcp-server@<version>` to npm.
 
 **Re-triggering CI without a version bump (admin only)**
 
@@ -413,14 +413,14 @@ docker pull andrestao577/raveneye:latest
 docker compose -f ~/.raveneye/compose.yaml --project-directory ~/.raveneye up -d
 
 # update the MCP CLI
-npm update -g raveneye-mcp
+npm update -g raveneye-mcp-server
 ```
 
 Windows:
 ```powershell
 docker pull andrestao577/raveneye:latest
 docker compose -f "$HOME\.raveneye\compose.yaml" --project-directory "$HOME\.raveneye" up -d
-npm update -g raveneye-mcp
+npm update -g raveneye-mcp-server
 ```
 
 ---
@@ -432,7 +432,7 @@ Act immediately — within minutes, not hours.
 ### npm token (`NPM_TOKEN`)
 
 1. Go to **npmjs.com → Account → Access Tokens**, revoke the token that leaked.
-2. Generate a new **Granular Access Token** with `read and write` on `raveneye-mcp` only.
+2. Generate a new **Granular Access Token** with `read and write` on `raveneye-mcp-server` only.
 3. Copy the new token.
 4. In GitHub → Settings → Secrets → Actions, update `NPM_TOKEN` with the new value.
 
@@ -458,7 +458,7 @@ Watch the Actions tab — both jobs (`docker` and `npm`) must show green.
 
 ```bash
 # Deprecate the compromised version so users won't install it
-npm deprecate raveneye-mcp@<version> "security: revoked — upgrade to latest"
+npm deprecate raveneye-mcp-server@<version> "security: revoked — upgrade to latest"
 ```
 
 Docker Hub: delete the specific tag from hub.docker.com → Repository → Tags.

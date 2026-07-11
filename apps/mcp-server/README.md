@@ -1,4 +1,4 @@
-# raveneye-mcp
+# raveneye-mcp-server
 
 MCP server for [Raveneye](https://github.com/AndresTaoFlorez/raveneye) — give your coding agent eyes and hands in a real browser.
 
@@ -21,10 +21,10 @@ docker run -d \
   andrestao577/raveneye:latest
 
 # Install the MCP server globally
-npm install -g raveneye-mcp
+npm install -g raveneye-mcp-server
 
 # Register with Claude Code
-claude mcp add raveneye -- raveneye-mcp
+claude mcp add raveneye -- raveneye-mcp-server
 ```
 
 Or one-command install (Linux/macOS):

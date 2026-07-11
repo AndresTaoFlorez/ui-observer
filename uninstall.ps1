@@ -27,9 +27,9 @@ docker rmi andrestao577/raveneye:latest 2>&1 | Out-Null
 if ($LASTEXITCODE -eq 0) { Ok "Image removed" } else { Warn "Image not found (already removed)" }
 
 # ── Uninstall npm package ─────────────────────────────────────────────────────
-Step "Uninstalling raveneye-mcp"
-npm uninstall -g raveneye-mcp 2>&1 | Out-Null
-if ($LASTEXITCODE -eq 0) { Ok "raveneye-mcp removed" } else { Warn "raveneye-mcp was not installed globally" }
+Step "Uninstalling raveneye-mcp-server"
+npm uninstall -g raveneye-mcp-server 2>&1 | Out-Null
+if ($LASTEXITCODE -eq 0) { Ok "raveneye-mcp-server removed" } else { Warn "raveneye-mcp-server was not installed globally" }
 
 # ── Remove MCP registration ───────────────────────────────────────────────────
 Step "Removing MCP server registration"

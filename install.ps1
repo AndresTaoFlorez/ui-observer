@@ -58,18 +58,18 @@ if (-not $ready) { Write-Host "  Stack may still be starting — check: docker l
 
 # ── Install MCP server ─────────────────────────────────────────────────────────
 Step "Installing MCP server (npm)"
-npm install -g raveneye-mcp
-Ok "raveneye-mcp installed globally"
+npm install -g raveneye-mcp-server
+Ok "raveneye-mcp-server installed globally"
 
 # ── Register with Claude Code ──────────────────────────────────────────────────
 Step "Registering with Claude Code"
 $claudeCmd = Get-Command claude -ErrorAction SilentlyContinue
 if ($claudeCmd) {
-    try { claude mcp add raveneye -- raveneye-mcp; Ok "Registered" }
+    try { claude mcp add raveneye -- raveneye-mcp-server; Ok "Registered" }
     catch { Ok "Already registered (or skipped)" }
 } else {
     Write-Host "  claude CLI not found — run once Claude Code is installed:" -ForegroundColor Yellow
-    Write-Host "  claude mcp add raveneye -- raveneye-mcp"
+    Write-Host "  claude mcp add raveneye -- raveneye-mcp-server"
 }
 
 # ── Done ───────────────────────────────────────────────────────────────────────
@@ -84,4 +84,4 @@ Write-Host "  Open a NEW Claude Code conversation and type /mcp"
 Write-Host "  You should see 'raveneye' with 11 tools."
 Write-Host ""
 Write-Host "  Stop:    docker compose -f $INSTALL_DIR\compose.yaml --project-directory $INSTALL_DIR down"
-Write-Host "  Update:  docker pull andrestao577/raveneye:latest; npm update -g raveneye-mcp"
+Write-Host "  Update:  docker pull andrestao577/raveneye:latest; npm update -g raveneye-mcp-server"

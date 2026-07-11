@@ -35,13 +35,13 @@ The custom MCP server lives in `apps/mcp-server/`. It wraps the HTTP API (port 8
 
 **Option A — global (recommended):**
 ```bash
-npm install -g raveneye-mcp
-claude mcp add raveneye -- raveneye-mcp
+npm install -g raveneye-mcp-server
+claude mcp add raveneye -- raveneye-mcp-server
 ```
 
 **Option B — dev dependency in your project (`-D`):**
 ```bash
-npm install -D raveneye-mcp
+npm install -D raveneye-mcp-server
 ```
 Add to `.claude/settings.json` / `codex.json` / `opencode.json`:
 ```json
@@ -49,7 +49,7 @@ Add to `.claude/settings.json` / `codex.json` / `opencode.json`:
   "mcpServers": {
     "raveneye": {
       "command": "npx",
-      "args": ["--yes", "raveneye-mcp"]
+      "args": ["--yes", "raveneye-mcp-server"]
     }
   }
 }
