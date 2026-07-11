@@ -5,10 +5,11 @@
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
-    "raveneye-mcp": "./dist/index.js"
+    "raveneye-mcp": "cli.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "cli.js"
   ],
   "scripts": {
     "build": "tsc",
