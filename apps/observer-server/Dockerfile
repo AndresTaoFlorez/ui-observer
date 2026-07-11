@@ -35,7 +35,7 @@ COPY apps/observer-server/src apps/observer-server/src
 COPY apps/mission-runner/src apps/mission-runner/src
 COPY apps/dashboard/src apps/dashboard/src
 COPY docs-vault docs-vault
-RUN tsc -b apps/shared apps/observer-server apps/mission-runner \
+RUN npx tsc -b apps/shared apps/observer-server apps/mission-runner \
     && npm run build -w @raveneye/dashboard \
     && chown -R pwuser:pwuser /app
 
