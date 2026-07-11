@@ -8,8 +8,11 @@ Exposes 11 MCP tools so any agent (Claude Code, Codex, OpenCode) can observe, na
 
 ## Prerequisites
 
-- Docker
+- Docker (to run the Raveneye stack)
 - Node.js 22+
+
+> **First install?** The package prints setup instructions automatically after `npm install`.
+> If the stack is not running when a tool is called, the error message tells you exactly how to start it.
 
 ## Install
 
